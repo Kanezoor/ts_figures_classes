@@ -1,6 +1,7 @@
 export interface Figure {
   shape: string;
   color: string;
+  getArea(): number;
 }
 export class Triangle implements Figure {
   public readonly shape = 'triangle';
@@ -42,20 +43,30 @@ export class Circle implements Figure {
   public getArea(): number {
     const area = Math.PI * this.radius ** 2;
 
+    return Math.floor(area * 100) / 100;
+  }
+}
+
+export class Rectangle implements Figure {
+  public shape: string = 'rectangle';
+
+  constructor(
+    public color: string,
+    public width: number,
+    public height: number,
+  ) {
+    if (this.width <= 0 || this.height <= 0) {
+      throw new Error('Width or Height cannot be equal zero or less');
+    }
+  }
+
+  public getArea(): number {
+    const area = this.width * this.height;
+
     return Math.round(area * 100) / 100;
   }
 }
 
-// export class Rectangle implements Figure {
-//   public shape: string = 'rectangle';
-
-//   constructor(
-//     public color: string,
-//     public width: number,
-//     public height: number,
-//   ) {}
-// }
-
-// export function getInfo(figure): string {
-//   return typeof figure;
-// }
+export function getInfo(figure: Figure): string {
+  return `A ${figure.color} ${figure.shape} - ${figure.getArea()}`;
+}
