@@ -8,9 +8,9 @@ export class Triangle implements Figure {
 
   constructor(
     public color: 'red' | 'green' | 'blue',
-    public a: number = 1,
-    public b: number = 1,
-    public c: number = 1,
+    public a: number,
+    public b: number,
+    public c: number,
   ) {
     if (a <= 0 || b <= 0 || c <= 0) {
       throw new Error(
@@ -40,8 +40,7 @@ export class Circle implements Figure {
     public radius: number,
   ) {
     if (this.radius <= 0) {
-      // eslint-disable-next-line no-template-curly-in-string
-      throw new Error('Invalid radius: ${radius} — radius must be > 0');
+      throw new Error(`Invalid radius: ${radius} — radius must be > 0`);
     }
   }
 
